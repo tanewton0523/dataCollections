@@ -1,17 +1,20 @@
 // RLAB 308.4.1
 // Data Collections
 
+let table = [];
 
 function parseCSV(csvString) {
     let cell1 = '', cell2 = '', cell3 = '', cell4 = '';
     let cellIndex = 1;
     let rows = [];
   
+    // Loop through each character in the CSV string
     for (let i = 0; i < csvString.length; i++) {
       let char = csvString[i];
       
+      // Check for the end of a cell
       if (char === ',' || char === '\n') {
-        
+        // Store cell data in the appropriate variable
         switch (cellIndex) {
           case 1: rows.push(cell1); cell1 = ''; cellIndex++; break;
           case 2: rows.push(cell2); cell2 = ''; cellIndex++; break;
@@ -19,12 +22,15 @@ function parseCSV(csvString) {
           case 4: rows.push(cell4); cell4 = ''; cellIndex = 1; break;
         }
   
+        // If end of row, log the row data
         if (char === '\n' && rows.length === 4) {
           console.log(rows[0], rows[1], rows[2], rows[3]);
+          table.push(rows);
           rows = [];
+          
         }
       } else {
-        
+        // Append character to the current cell
         switch (cellIndex) {
           case 1: cell1 += char; break;
           case 2: cell2 += char; break;
@@ -38,4 +44,5 @@ function parseCSV(csvString) {
   
   const csvString = `ID,Name,Occupation,Age\n42,Bruce,Knight,41\n57,Bob,Fry Cook,19\n63,Blaine,Quiz Master,58\n98,Bill,Doctor’s Assistant,26`;
   parseCSV(csvString);
+  console.log(table)
   
