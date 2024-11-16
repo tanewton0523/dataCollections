@@ -86,5 +86,11 @@ console.log("The average age is:", averageAge);
 // Step 5: Full Circle
 // Transform data back to csv format
 
-objectsArray = csvString
-console.log(objectsArray)
+// Make header
+let header = Object.keys(objectsArray[0]).join(",");
+// Make rows
+let row = objectsArray.map(comChar => Object.values(comChar).join(",")).join("\n");
+// Combine headers and rows
+const csv = `${header}\n${row}`;
+
+console.log(csv);
