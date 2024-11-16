@@ -2,6 +2,7 @@
 // Data Collections
 
 let table = [];
+let totalAge = 0;
 
 function parseCSV(csvString) {
     let cell1 = '', cell2 = '', cell3 = '', cell4 = '';
@@ -46,3 +47,44 @@ function parseCSV(csvString) {
   parseCSV(csvString);
   console.log(table)
   
+  // Step 1: Split the CSV string into rows
+let rows = csvString.split('\n'); // Split into rows
+
+// Step 2: Split each row into columns
+let twoDimensionalArray = rows.map(row => row.split(',')); // Create a 2D array
+
+// Cache the array for later use
+console.log(twoDimensionalArray);
+
+// Step 3: Transform the 2D array into an array of objects
+let headers = twoDimensionalArray[0].map(header => header.toLowerCase()); // Get headers and convert to lowercase
+let objectsArray = twoDimensionalArray.slice(1).map(row => {
+    let obj = {};
+    headers.forEach((header, index) => {
+        obj[header] = row[index]; // Assign values to keys
+    });
+    return obj; // Return the object
+});
+console.log(objectsArray)
+
+// Step 4: Sorting and Manipulating Data
+// Remove last element
+objectsArray.pop()
+// console.log(objectsArray)
+// Insert object to 1 
+objectsArray.splice(1, 0, {id: "48", name: "Barry", occupation: "Runner", age: "25"});
+// Add object to end of array
+objectsArray.push( {id: "7", name: "Bilbo", occupation: "None", age: "111"});
+console.log(objectsArray)
+// Calculate average age with a loop
+for (let i = 0; i < objectsArray.length; i++) {
+  totalAge += parseInt(objectsArray[i].age);
+}
+let averageAge = totalAge / objectsArray.length;
+console.log("The average age is:", averageAge);
+
+// Step 5: Full Circle
+// Transform data back to csv format
+
+objectsArray = csvString
+console.log(objectsArray)
